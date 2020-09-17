@@ -1,5 +1,5 @@
 # AppGenerator
-
+![](./demo.gif)
 
 ## Installation
 The instructions are a bit different depending on your development operating system.
