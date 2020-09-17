@@ -4,6 +4,11 @@
 ## Installation
 The instructions are a bit different depending on your development operating system.
 Follow these [instructions](https://reactnative.dev/docs/environment-setup)
+## Install modules
+in the root directory run the following command 
+```sh
+npm install
+```
 
 ## Run the application
 #### Start Metro
