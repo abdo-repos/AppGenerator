@@ -6,6 +6,7 @@ import Home from './screens/HomeScreen';
 import {ActivityIndicator, View, StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
