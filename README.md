@@ -16,7 +16,7 @@ npm install
 
 ## Run the application
 to test the application you need to generate `Data.json` from [here](https://backoffice-35933.firebaseapp.com/signin)
-place it in the ![assets folder](./assets)
+and place it in the ![assets folder](./assets)
 #### Running On Device
 follow these [instructions](https://reactnative.dev/docs/running-on-device)
 
