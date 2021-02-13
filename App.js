@@ -5,11 +5,18 @@ import MyTabs from './routes/MyTabs';
 import Home from './screens/HomeScreen';
 import {ActivityIndicator, View, StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import {useNetInfo} from '@react-native-community/netinfo'
+import sendData from './api/sendData'
+
+
 
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const netInfo = useNetInfo();
+
+ 
 
   useEffect(() => {
     setTimeout(async () => {
@@ -21,8 +28,37 @@ export default function App() {
       }
       setUser(userName);
       setIsLoading(false);
-    }, 1000);
+      
+    }, 500);
   }, []);
+
+  useEffect(()=>{
+    setTimeout(async ()=>{
+      if(user){
+     let data = [];
+        try{
+         let savedData = await AsyncStorage.getItem('data') 
+         if(savedData)
+          data = JSON.parse(savedData)
+        if(netInfo.isInternetReachable){
+          if(data)
+            data.map(d=>sendData(d))
+          sendData({user,date:new Date()})
+          console.log('send')
+          await AsyncStorage.removeItem('data')
+        }else{
+          await AsyncStorage.setItem('data',JSON.stringify([...data,{user,date:new Date()}]))
+          
+        }
+        }catch(e){
+          console.log(e);
+        }
+        
+     }
+    
+},1000)
+    
+  },[user])
 
   const login = async (firstName, lastName) => {
     try {
@@ -47,5 +83,5 @@ export default function App() {
     <NavigationContainer>
       {user ? <MyTabs /> : <Home login={login} />}
     </NavigationContainer>
-  );
+  )
 }
